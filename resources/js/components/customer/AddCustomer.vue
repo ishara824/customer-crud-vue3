@@ -7,6 +7,7 @@
         </div>
         <div class="row mt-4">
             <div class="col-md-12">
+                <form @submit.prevent="saveCustomer">
                     <div class="col-md-6">
                         <label for="">Full Name</label>
                         <input type="text" class="form-control" v-model="customer.full_name">
@@ -28,8 +29,10 @@
                         <span class="text-danger" v-if="errors?.mobile_number">{{ errors.mobile_number[0] }}</span>
                     </div>
                     <div class="col-md-6 mt-2">
-                        <button @click="saveCustomer" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
+                </form>
+
             </div>
         </div>
     </div>

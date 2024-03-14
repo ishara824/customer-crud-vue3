@@ -3,6 +3,7 @@ import { createWebHistory, createRouter } from "vue-router";
 const ListCustomer = () => import('../components/customer/ListCustomer.vue')
 const AddCustomer = () => import('../components/customer/AddCustomer.vue')
 const EditCustomer = () => import('../components/customer/EditCustomer.vue');
+const PageNotFound = () => import('../components/NotFound.vue')
 
 const Routes = [
     {
@@ -19,6 +20,10 @@ const Routes = [
         name: "EditCustomer",
         path: '/customer/:id/edit',
         component: EditCustomer,
+    },
+    {
+        path: "/:catchAll(.*)",
+        component: PageNotFound
     }
 ]
 
