@@ -50,6 +50,7 @@ export default {
         const router = useRouter();
 
         const saveCustomer = async () => {
+            window.axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
             await axios.post(`/api/customers`, customer.value).then(response => {
                 if (response.data.code === 200){
                     Swal.fire({

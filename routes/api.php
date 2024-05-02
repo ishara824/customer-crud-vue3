@@ -19,6 +19,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('customers',CustomerController::class);
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::resource('customers',CustomerController::class);
+    Route::get('/logout', [\App\Http\Controllers\API\AuthController::class, 'logout']);
+});
+//Route::resource('customers',CustomerController::class);
+
+Route::post('/login', [\App\Http\Controllers\API\AuthController::class, 'login']);
 
 

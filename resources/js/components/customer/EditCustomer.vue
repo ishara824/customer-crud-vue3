@@ -51,12 +51,14 @@ export default {
         const { id } = router.currentRoute.value.params; // access route params
 
         const getCustomerById = async () => {
+            window.axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
             await axios.get(`/api/customers/${id}/edit`).then(response => {
                 customer.value = response.data;
             });
         }
 
         const editCustomer = async () => {
+            window.axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
             await axios.put(`/api/customers/${id}`, customer.value).then(response => {
                 if (response.data.code === 200){
                     Swal.fire({
