@@ -19,7 +19,7 @@
                         <span class="text-danger" v-if="errors?.password">{{ errors.password[0] }}</span>
                     </div>
                     <div class="col-md-6 mt-2">
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary">Login</button>
                     </div>
                 </form>
 
