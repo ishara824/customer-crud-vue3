@@ -40,8 +40,8 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'api' => [
-            'driver' => 'sanctum',
+        'api' => [ //Configuration for the API guard, typically used for stateless, token-based authentication (using Sanctum or Passport).
+            'driver' => 'sanctum', //Specifies the driver for this guard, which is 'sanctum'. It means that Sanctum is used for API token authentication.
             'provider' => 'users',
         ]
     ],

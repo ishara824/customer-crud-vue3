@@ -24,7 +24,7 @@ class AuthController extends Controller
             ],401);
         }
 
-        $token = $user->createToken('AuthToken', ["*"], Carbon::now()->addDays(1));
+        $token = $user->createToken('AuthToken', ["*"], Carbon::now()->addDays(1)); // Create the token and set the expired time to One Day
 //        $token = $user->createToken('AuthToken', ["*"], Carbon::now()->addMinutes(1));
         $user['access_token'] = $token->plainTextToken;
         $user['expires_at'] = $token->accessToken->expires_at;
@@ -33,7 +33,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
+        $request->user()->currentAccessToken()->delete(); // Revoke the current access token
         return response()->json("Logout successful!");
     }
 }

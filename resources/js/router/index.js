@@ -31,10 +31,10 @@ const Routes = [
         component: EditCustomer,
         meta: { requiresAuth : true }
     },
-    {
-        path: "/:catchAll(.*)",
-        component: PageNotFound
-    }
+    // {
+    //     path: "/:catchAll(.*)",
+    //     component: PageNotFound
+    // }
 ]
 
 let router = new createRouter({
@@ -43,8 +43,13 @@ let router = new createRouter({
 })
 const authGuard = (to, from, next) => {
     const authStore = useAuthStore(); // Direct access to the authStore
-    if (to.meta.requiresAuth && !authStore.isLoggedIn) {
-        // Redirect to login page if not authenticated
+    if (to.name === 'Login' && authStore.isLoggedIn) {
+        // If the user is already authenticated and trying to access the login page,
+        // redirect to another page, such as the dashboard
+        next({ name: 'ListCustomer' });
+    } else if (to.meta.requiresAuth && !authStore.isLoggedIn) {
+        // If the route requires authentication and the user is not logged in,
+        // redirect to the login page
         next({ name: 'Login' });
     } else {
         // Allow access to the route

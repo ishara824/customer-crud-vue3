@@ -15,11 +15,14 @@
                     </div>
                     <div class="col-md-6">
                         <label for="">Password</label>
-                        <input type="text" class="form-control" v-model="user.password">
+                        <input type="password" class="form-control" v-model="user.password">
                         <span class="text-danger" v-if="errors?.password">{{ errors.password[0] }}</span>
                     </div>
                     <div class="col-md-6 mt-2">
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button v-if="!isLoading" type="submit" class="btn btn-primary">Login</button>
+                        <div v-if="isLoading" class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
                     </div>
                 </form>
 
@@ -38,18 +41,23 @@ export default {
     setup(){
         const user = ref({});
         const errors = ref();
+        const isLoading = ref(false);
 
         const authStore = useAuthStore();
         const router = useRouter();
 
         const login = async () => {
+            clearErrors();
+            isLoading.value = true;
             try {
                 await axios.get('/sanctum/csrf-cookie');
                 const response = await axios.post('/api/login' ,user.value);
                 authStore.login(response.data.access_token).then(() => {
+                    isLoading.value = false;
                     router.push({name: 'ListCustomer'});
                 });
             } catch (error) {
+                isLoading.value = false;
                 console.log(error);
                 if (error.response.status === 422) {
                     errors.value = error.response.data.errors;
@@ -57,10 +65,15 @@ export default {
             }
         }
 
+        const clearErrors = () => {
+            errors.value = "";
+        }
+
         return{
             user,
             errors,
-            login
+            login,
+            isLoading
         }
     }
 }

@@ -2,11 +2,10 @@
     <div class="container mt-2">
         <div class="row justify-content-end">
             <div class="col-md-6">
-                <h3>List Customer</h3>
+                <h3>List Customer {{ userName }}</h3>
             </div>
             <div class="col-md-3">
                 <router-link :to="{ name : 'AddCustomer'}" class="btn btn-success float-end">Create +</router-link>
-
             </div>
             <div class="col-md-3">
                 <button class="btn btn-primary" @click="logout">Logout</button>
@@ -84,13 +83,16 @@ export default {
             })
         }
 
+        const userName = authStore.user ? authStore.user.name : ""; // We can access the auth user in every component using store
+
         onMounted(getAllCustomers);
 
         return {
             customers,
             getAllCustomers,
             deleteCustomer,
-            logout
+            logout,
+            userName
         }
     }
 }
