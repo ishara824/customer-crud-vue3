@@ -6,6 +6,7 @@ const AddCustomer = () => import('../components/customer/AddCustomer.vue')
 const EditCustomer = () => import('../components/customer/EditCustomer.vue');
 const PageNotFound = () => import('../components/NotFound.vue')
 const Login = () => import('../components/Login.vue');
+const ParentComponent = () => import('../components/PropsExample/ParentComponent.vue');
 
 const Routes = [
     {
@@ -31,10 +32,15 @@ const Routes = [
         component: EditCustomer,
         meta: { requiresAuth : true }
     },
-    // {
-    //     path: "/:catchAll(.*)",
-    //     component: PageNotFound
-    // }
+    {
+        name: "ParentComponent",
+        path: '/parent',
+        component: ParentComponent
+    },
+    {
+        path: "/:catchAll(.*)",
+        component: PageNotFound
+    }
 ]
 
 let router = new createRouter({
