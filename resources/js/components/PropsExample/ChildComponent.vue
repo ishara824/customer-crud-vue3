@@ -3,6 +3,7 @@
     <h2>Child Component</h2>
     <p>Message from Parent: {{ message }}</p>
     <p>Welcome to {{ currentYear }}</p>
+    <p>Description {{ description }}</p>
   </div>
 </template>
 
@@ -17,6 +18,10 @@ export default {
     currentYear: {
       type: Number,
       required: true
+    },
+    description: {
+        type: String,
+        required: true
     }
   }
 };

@@ -7,6 +7,8 @@ const EditCustomer = () => import('../components/customer/EditCustomer.vue');
 const PageNotFound = () => import('../components/NotFound.vue')
 const Login = () => import('../components/Login.vue');
 const ParentComponent = () => import('../components/PropsExample/ParentComponent.vue');
+const EmitParent = () => import('../components/EmitExample/EmitParent.vue');
+const WatchComponent = () => import('../components/WatchExample/WatchComponent.vue');
 
 const Routes = [
     {
@@ -34,8 +36,18 @@ const Routes = [
     },
     {
         name: "ParentComponent",
-        path: '/parent',
+        path: '/props/example',
         component: ParentComponent
+    },
+    {
+        name: "EmitParent",
+        path: '/emit/example',
+        component: EmitParent
+    },
+    {
+        name: "WatchExample",
+        path: '/watch/example',
+        component: WatchComponent
     },
     {
         path: "/:catchAll(.*)",
